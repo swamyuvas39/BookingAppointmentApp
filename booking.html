@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Booking Appointment App</title>
+  <style>
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-group {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+    <div class="container" style="background-Color:pink; text-align:center; width: 50%;">
+        <h2>Booking Appointment</h2>
+        <form id="bookingForm">
+          <div class="form-group">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="date">Date</label><br>
+            <input type="date" id="date" required>
+          </div>
+          <div class="form-group">
+            <label for="time">Time</label><br>
+            <input type="time" id="time" required>
+          </div>
+          <div class="form-group">
+            <label for="comments">Comments</label><br>
+            <textarea id="comments" rows="3"></textarea>
+          </div>
+          <button type="submit">Book Appointment</button>
+        </form>
+        <h3>Upcoming Appointments:</h3>
+        <ul id="appointmentsList"></ul>
+      </div>
+
+  <script src="booking.js"></script>
+</body>
+</html>
