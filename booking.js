@@ -56,8 +56,68 @@ function addAppointment(appointment) {
 
   // Append the delete button to the list item
   listItem.appendChild(deleteButton);
+
+   // Add event listener to the edit button
+   var editButton = document.createElement('button');
+   editButton.textContent = 'Edit';
+   editButton.addEventListener('click', function() {
+     // Call function to edit the appointment in local storage
+     editAppointment(appointment);
+   });
+ 
+   // Append the edit button to the list item
+   listItem.appendChild(editButton);
 }
 function deleteAppointment() {
   // Clear all data from local storage
   localStorage.clear();
+}
+function editAppointment(appointment) {
+  // Update the appointment details based on user input
+  var newName = prompt('Enter a new name:', appointment.name);
+  var newDate = prompt('Enter a new date:', appointment.date);
+  var newTime = prompt('Enter a new time:', appointment.time);
+  var newComments = prompt('Enter new comments:', appointment.comments);
+
+  // Create a new appointment object with the updated details
+  var updatedAppointment = {
+    name: newName,
+    date: newDate,
+    time: newTime,
+    comments: newComments
+  };
+
+  // Update the appointment in local storage
+  updateAppointment(appointment, updatedAppointment);
+
+  // Update the appointment details in the list item
+  var listItem = document.querySelector('li');
+  listItem.innerHTML = `
+    <strong>${updatedAppointment.name}</strong>
+    <br>Date: ${updatedAppointment.date}
+    <br>Time: ${updatedAppointment.time}
+    <br>Comments: ${updatedAppointment.comments}
+  `;
+}
+function updateAppointment(oldAppointment, newAppointment) {
+  // Retrieve the existing appointments from local storage
+  var appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+
+  // Find the index of the old appointment in the array
+  var index = appointments.findIndex(function(item) {
+    return (
+      item.name === oldAppointment.name &&
+      item.date === oldAppointment.date &&
+      item.time === oldAppointment.time &&
+      item.comments === oldAppointment.comments
+    );
+  });
+
+  // Update the appointment in the array if found
+  if (index !== -1) {
+    appointments[index] = newAppointment;
+  }
+
+  // Save the updated appointments array back to local storage
+  localStorage.setItem('appointments', JSON.stringify(appointments));
 }
