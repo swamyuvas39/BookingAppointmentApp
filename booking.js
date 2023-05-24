@@ -42,4 +42,22 @@ function addAppointment(appointment) {
 
   // Append the list item to the appointments list
   appointmentsList.appendChild(listItem);
+  
+  // Add event listener to the delete button
+  var deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Delete';
+  deleteButton.addEventListener('click', function() {
+    // Call function to delete all data from local storage
+    deleteAppointment();
+
+    // Remove the list item from the appointments list
+    listItem.remove();
+  });
+
+  // Append the delete button to the list item
+  listItem.appendChild(deleteButton);
+}
+function deleteAppointment() {
+  // Clear all data from local storage
+  localStorage.clear();
 }
